@@ -1,7 +1,7 @@
 from django.utils import simplejson as json
 from django.core.serializers.json import DjangoJSONEncoder
-
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
+from django.middleware.csrf import get_token
 
 from ajaxuploader.backends.local import LocalUploadBackend
 
@@ -60,3 +60,14 @@ class AjaxFileUploader(object):
                 ret_json.update(extra_context)
 
             return HttpResponse(json.dumps(ret_json, cls=DjangoJSONEncoder), content_type='application/json; charset=utf-8')
+
+
+
+
+
+def start(request):
+    csrf_token = get_token(request)
+    return render_to_response('import.html',
+        {'csrf_token': csrf_token}, context_instance = RequestContext(request))
+
+import_uploader = AjaxFileUploader()

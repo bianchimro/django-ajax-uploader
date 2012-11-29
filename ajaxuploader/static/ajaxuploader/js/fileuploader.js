@@ -235,6 +235,8 @@ qq.obj2url = function(obj, temp, prefixDone){
     } else {
         uristrings.push(encodeURIComponent(temp) + '=' + encodeURIComponent(obj));
     }
+    
+    console.log("ssss", obj, temp, prefixDone, uristrings);
 
     return uristrings.join(prefix)
                      .replace(/^&/, '')
